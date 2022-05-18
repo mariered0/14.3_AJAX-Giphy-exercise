@@ -1,0 +1,22 @@
+body {
+    background-color: black;
+}
+
+#form-container {
+   margin: 20px; 
+}
+
+h1 {
+    font-size: 3rem;
+    font-family: Montserrat;
+}
+
+.letter {
+    transition: color 1000ms;
+}
+
+img {
+    margin: 10px;
+    max-width: 250px;
+    max-height: 300px;
+}
