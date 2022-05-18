@@ -8,10 +8,14 @@ const $allImages = $('img');
 //this is global variable, but cannot have the imgUrl. it becomes undefined
 
 async function getGiphy(api_key, q){
-    const res = await axios.get(`https://api.giphy.com/v1/gifs/search?api_key=${api_key}&q=${q}&limit=1`);
-    const img = document.createElement('img');
-    img.src = res.data.data[0].images.downsized.url;
-    imgDiv.appendChild(img);
+    try{
+        const res = await axios.get(`https://api.giphy.com/v1/gifs/search?api_key=${api_key}&q=${q}&limit=1`);
+        const img = document.createElement('img');
+        img.src = res.data.data[0].images.downsized.url;
+        imgDiv.appendChild(img);
+    }catch (e){
+        console.log(e);
+    };
 };
 
 removeBtn.addEventListener('click', function(e){
