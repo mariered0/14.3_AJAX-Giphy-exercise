@@ -7,9 +7,11 @@ const $allImages = $('img');
 
 async function getGiphy(api_key, q) {
     try {
-        const res = await axios.get(`https://api.giphy.com/v1/gifs/search?api_key=${api_key}&q=${q}&limit=1`);
+        const res = await axios.get(`https://api.giphy.com/v1/gifs/search?api_key=${api_key}&q=${q}&limit=10`);
+        
+        const randomNum = Math.floor(Math.random() * 10);
         const img = document.createElement('img');
-        img.src = res.data.data[0].images.downsized.url;
+        img.src = res.data.data[randomNum].images.downsized.url;
         imgDiv.appendChild(img);
     } catch (e) {
         console.log(e);
@@ -30,7 +32,6 @@ form.addEventListener('submit', function (e) {
 
 
 function randomRGB() {
-    //this will give a whole number instead of a dicimal.
     const r = Math.floor(Math.random() * 256);
     const g = Math.floor(Math.random() * 256);
     const b = Math.floor(Math.random() * 256);
