@@ -1,35 +1,34 @@
 const api_key = 'T92FH9Vwx2A3pGpt1O08fUErbq2lri9i';
-const form = document.querySelector('#form');
+const searchBtn = document.querySelector('#search-btn');
 const input = document.querySelector('#search-input');
 const imgDiv = document.querySelector('#img-container');
 const removeBtn = document.querySelector('#remove-btn');
 const $allImages = $('img');
 
 async function getGiphy(api_key, q) {
-    try {
-        const res = await axios.get(`https://api.giphy.com/v1/gifs/search?api_key=${api_key}&q=${q}&limit=10`);
-        
-        const randomNum = Math.floor(Math.random() * 10);
-        const img = document.createElement('img');
-        img.src = res.data.data[randomNum].images.downsized.url;
-        imgDiv.appendChild(img);
-    } catch (e) {
-        console.log(e);
-    };
+    const res = await axios.get(`https://api.giphy.com/v1/gifs/search?api_key=${api_key}&q=${q}&limit=10`);
+
+    const randomNum = Math.floor(Math.random() * 10);
+    const url = res.data.data[randomNum].images.downsized.url;
+    createImage(url);
 };
 
-removeBtn.addEventListener('click', function (e) {
-    const $allImages = $('img');
-    $allImages.remove();
-})
+function createImage(imgURL) {
+    const img = document.createElement('img');
+    img.src = imgURL;
+    imgDiv.appendChild(img);
+}
 
-form.addEventListener('submit', function (e) {
+searchBtn.addEventListener('click', function (e) {
     e.preventDefault();
     getGiphy(api_key, input.value);
     input.value = '';
 });
 
-
+removeBtn.addEventListener('click', function (e) {
+    const $allImages = $('img');
+    $allImages.remove();
+})
 
 function randomRGB() {
     const r = Math.floor(Math.random() * 256);
